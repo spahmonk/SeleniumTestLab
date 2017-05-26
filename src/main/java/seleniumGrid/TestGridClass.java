@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -109,12 +110,14 @@ public class TestGridClass {
     public void googletTst(){
         driver.get("http://google.com");
         waitForLoad(driver);
-        driver.findElement(By.xpath("//*[@title=\"Search\" and @name=\"q\"]")).sendKeys("googleHelp");
-        try {
+        driver.findElement(By.xpath("//*[@title=\"Search\" and @name=\"q\"]")).sendKeys("googleHelp\n");
+/*        try {
             Thread.currentThread().sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
+        String result=driver.findElement(By.xpath("//*[@id=\"ires\"]")).getText();
+        Assert.assertTrue(result.contains("Google Help"));
     }
 
 
